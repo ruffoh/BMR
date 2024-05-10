@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMR Calculator</title>
+    <script>
+        function calculateBMR() {
+            var age = parseFloat(document.getElementById("age").value);
+            var weight = parseFloat(document.getElementById("weight").value);
+            var height = parseFloat(document.getElementById("height").value);
+            var gender = document.getElementById("gender").value;
+            var activityLevel = parseFloat(document.getElementById("activityLevel").value);
+            var systemOfMeasurement = document.getElementById("systemOfMeasurement").value;
+            var calorieUnit = document.getElementById("calorieUnit").value;
+
+            var bmr;
+            if (gender === "male") {
+                bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+            } else {
+                bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+            }
+
+            if (systemOfMeasurement === "imperial") {
+                bmr *= 2.20462;
+            }
+
+            var totalCalories = bmr * activityLevel;
+
+            var result = "Your Basal Metabolic Rate (BMR) is: " + bmr.toFixed(2) + " " + calorieUnit + "/day.";
+            result += "<br>Your total daily calorie needs are: " + totalCalories.toFixed(2) + " " + calorieUnit + "/day.";
+            document.getElementById("result").innerHTML = result;
+        }
+    </script>
+</head>
+<body>
+    <h2>BMR Calculator</h2>
+    <form>
+        <input type="number" id="age" placeholder="Age (years)" required><br>
+        <input type="number" id="weight" placeholder="Weight (kg)" required><br>
+        <input type="number" id="height" placeholder="Height (cm)" required><br>
+        <select id="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select><br>
+        <input type="number" id="activityLevel" step="0.01" min="0" placeholder="Activity Level" required><br>
+        <select id="systemOfMeasurement" required>
+            <option value="metric">Metric</option>
+            <option value="imperial">Imperial</option>
+        </select><br>
+        <select id="calorieUnit" required>
+            <option value="kcal">kcal</option>
+            <option value="kj">kilojoules</option>
+        </select><br>
+        <button type="button" onclick="calculateBMR()">Calculate</button>
+    </form>
+
+    <div id="result"></div>
+</body>
+</html>
