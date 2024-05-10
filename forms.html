@@ -1,60 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMR Calculator</title>
+    <title>Calcolatore BMR</title>
     <script>
-        function calculateBMR() {
-            var età = parseFloat(document.getElementById("età").value);
+        function calcolaBMR() {
+            var eta = parseFloat(document.getElementById("eta").value);
             var peso = parseFloat(document.getElementById("peso").value);
             var altezza = parseFloat(document.getElementById("altezza").value);
-            var gender = document.getElementById("gender").value;
-            var LivelloAttività = parseFloat(document.getElementById("LivelloAttività").value);
-            var Metrica = document.getElementById("Metrica").value;
-            var MisuraCalorie = document.getElementById("MisuraCalorie").value;
+            var genere = document.getElementById("genere").value;
+            var livelloAttivita = parseFloat(document.getElementById("livelloAttivita").value);
+            var sistemaMisura = document.getElementById("sistemaMisura").value;
+            var unitaCalorie = document.getElementById("unitaCalorie").value;
 
+            
             var bmr;
-            if (gender === "male") {
-                bmr = 10 * peso + 6.25 * altezza - 5 * età + 5;
+            if (genere === "maschio") {
+                bmr = 10 * peso + 6.25 * altezza - 5 * eta + 5; // uomo 
             } else {
-                bmr = 10 * peso + 6.25 * altezza - 5 * età - 161;
+                bmr = 10 * peso + 6.25 * altezza - 5 * eta - 161; // donna
             }
 
-            if (Metrica === "imperial") {
+            
+            if (sistemaMisura === "imperiale") {
                 bmr *= 2.20462;
             }
 
-            var totalCalories = bmr * LivelloAttività;
+            var fabbisognoCaloricoTotale = bmr * livelloAttivita;
 
-            var result = "IL tuo BMR è: " + bmr.toFixed(2) + " " + MisuraCalorie + "/day.";
-            result += "<br> Le Calorie giornaliere sono: " + totalCalories.toFixed(2) + " " + MisuraCalorie + "/day.";
-            document.getElementById("result").innerHTML = result;
+           
+            var risultato = "Il tuo tasso metabolico basale (BMR) è: " + bmr.toFixed(2) + " " + unitaCalorie + "/giorno.";
+            risultato += "<br>Il tuo fabbisogno calorico giornaliero totale è: " + fabbisognoCaloricoTotale.toFixed(2) + " " + unitaCalorie + "/giorno.";
+            document.getElementById("risultato").innerHTML = risultato;
         }
     </script>
 </head>
 <body>
-    <h2>BMR Calculator</h2>
+    <h2>Calcolatore BMR</h2>
     <form>
-        <input type="number" id="età" placeholder="età (years)" required><br>
-        <input type="number" id="peso" placeholder="peso (kg)" required><br>
-        <input type="number" id="altezza" placeholder="altezza (cm)" required><br>
-        <select id="gender" required>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
+        <label for="eta">Età (anni):</label>
+        <input type="number" id="eta" required><br>
+
+        <label for="peso">Peso (kg):</label>
+        <input type="number" id="peso" required><br>
+
+        <label for="altezza">Altezza (cm):</label>
+        <input type="number" id="altezza" required><br>
+
+        <label for="genere">Genere:</label>
+        <select id="genere" required>
+            <option value="maschio">Maschio</option>
+            <option value="femmina">Femmina</option>
         </select><br>
-        <input type="number" id="LivelloAttività" step="0.01" min="0" placeholder="Activity Level" required><br>
-        <select id="Metrica" required>
-            <option value="metric">Metric</option>
-            <option value="imperial">Imperial</option>
+
+        <label for="livelloAttivita">Livello di Attività:</label>
+        <input type="number" id="livelloAttivita" step="0.01" min="0" required><br>
+
+        <label for="sistemaMisura">Sistema di Misura:</label>
+        <select id="sistemaMisura" required>
+            <option value="metrico">Metrico</option>
+            <option value="imperiale">Imperiale</option>
         </select><br>
-        <select id="MisuraCalorie" required>
+
+        <label for="unitaCalorie">Unità di Misura:</label>
+        <select id="unitaCalorie" required>
             <option value="kcal">kcal</option>
             <option value="kj">kilojoules</option>
         </select><br>
-        <button type="button" onclick="calculateBMR()">Calculate</button>
+
+        <button type="button" onclick="calcolaBMR()">Calcola</button>
     </form>
 
-    <div id="result"></div>
+    <div id="risultato"></div>
 </body>
 </html>
