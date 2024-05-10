@@ -6,29 +6,29 @@
     <title>BMR Calculator</title>
     <script>
         function calculateBMR() {
-            var age = parseFloat(document.getElementById("age").value);
-            var weight = parseFloat(document.getElementById("weight").value);
-            var height = parseFloat(document.getElementById("height").value);
+            var età = parseFloat(document.getElementById("età").value);
+            var peso = parseFloat(document.getElementById("peso").value);
+            var altezza = parseFloat(document.getElementById("altezza").value);
             var gender = document.getElementById("gender").value;
-            var activityLevel = parseFloat(document.getElementById("activityLevel").value);
-            var systemOfMeasurement = document.getElementById("systemOfMeasurement").value;
-            var calorieUnit = document.getElementById("calorieUnit").value;
+            var LivelloAttività = parseFloat(document.getElementById("LivelloAttività").value);
+            var Metrica = document.getElementById("Metrica").value;
+            var MisuraCalorie = document.getElementById("MisuraCalorie").value;
 
             var bmr;
             if (gender === "male") {
-                bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+                bmr = 10 * peso + 6.25 * altezza - 5 * età + 5;
             } else {
-                bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+                bmr = 10 * peso + 6.25 * altezza - 5 * età - 161;
             }
 
-            if (systemOfMeasurement === "imperial") {
+            if (Metrica === "imperial") {
                 bmr *= 2.20462;
             }
 
-            var totalCalories = bmr * activityLevel;
+            var totalCalories = bmr * LivelloAttività;
 
-            var result = "Your Basal Metabolic Rate (BMR) is: " + bmr.toFixed(2) + " " + calorieUnit + "/day.";
-            result += "<br>Your total daily calorie needs are: " + totalCalories.toFixed(2) + " " + calorieUnit + "/day.";
+            var result = "IL tuo BMR è: " + bmr.toFixed(2) + " " + MisuraCalorie + "/day.";
+            result += "<br> Le Calorie giornaliere sono: " + totalCalories.toFixed(2) + " " + MisuraCalorie + "/day.";
             document.getElementById("result").innerHTML = result;
         }
     </script>
@@ -36,19 +36,19 @@
 <body>
     <h2>BMR Calculator</h2>
     <form>
-        <input type="number" id="age" placeholder="Age (years)" required><br>
-        <input type="number" id="weight" placeholder="Weight (kg)" required><br>
-        <input type="number" id="height" placeholder="Height (cm)" required><br>
+        <input type="number" id="età" placeholder="età (years)" required><br>
+        <input type="number" id="peso" placeholder="peso (kg)" required><br>
+        <input type="number" id="altezza" placeholder="altezza (cm)" required><br>
         <select id="gender" required>
             <option value="male">Male</option>
             <option value="female">Female</option>
         </select><br>
-        <input type="number" id="activityLevel" step="0.01" min="0" placeholder="Activity Level" required><br>
-        <select id="systemOfMeasurement" required>
+        <input type="number" id="LivelloAttività" step="0.01" min="0" placeholder="Activity Level" required><br>
+        <select id="Metrica" required>
             <option value="metric">Metric</option>
             <option value="imperial">Imperial</option>
         </select><br>
-        <select id="calorieUnit" required>
+        <select id="MisuraCalorie" required>
             <option value="kcal">kcal</option>
             <option value="kj">kilojoules</option>
         </select><br>
